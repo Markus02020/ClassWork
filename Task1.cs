@@ -1,66 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CW5.Variant00
+namespace ConsoleApp1
 {
-    public class Task1
+    public class Task1 : Pink
     {
-        public struct Number : INumber
+        private int _output;
+        public Task1(string name) : base(name)
         {
-            private double _real;
-            
-            public double Real => _real;
-            public double Abs => Math.Abs(_real);
-            public int Sign => Math.Sign(_real);
-            public Number(double real)
-            {
-                _real = real;
-                
-            }
-            public void Sum(INumber other)
-            {
-                if (other == null)
-                {
-                    return;
-                }
-                _real += other.Real;
-            }
-            public void Sub(INumber other)
-            {
-                if (other == null)
-                {
-                    return;
-                }
-                _real -= other.Real; 
-            }
-            public void Mul(INumber other)
-            {
-                if (other == null)
-                {
-                    return;
-                }
-                _real *= other.Real;
-            }
-            public void Div(INumber other)
-            {
-                if (other.Real == 0)
-                {
-                    return;
-                }
-                _real /= other.Real;
-            }
-            public void Neg()
-            {
-                if (_real == 0)
-                {
-                    return;
-                }
-                _real *= -1;
-            }
+            _output = 0;
         }
 
+        public override void Review()
+        {
+            throw new NotImplementedException();
+        }
+        public override string ToString()
+        {
+            return $"{Name}{Environment.NewLine}{_output}";
+        }
     }
 }
