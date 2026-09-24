@@ -1,0 +1,45 @@
+-- task1
+select * from SalesLT.Customer;
+--------------------------
+select Title, FirstName, isnull(MiddleName, '') as middlename, LastName, isnull(Suffix, '') as suffix 
+from SalesLT.Customer;
+----------------------
+select SalesPerson, isnull(Title + ' ', '')+ LastName as CustomerName, Phone 
+from SalesLT.Customer;
+
+
+--task2
+select try_cast(CustomerID as varchar) + ': ' + CompanyName as CustomerCompany
+from SalesLT.Customer;
+-----------------------
+select SalesOrderNumber + ' (' + try_cast(RevisionNumber as varchar) + ')' as OrderRevision
+from SalesLT.SalesOrderHeader;
+----
+select convert(varchar, OrderDate, 102) as OrderDate
+from SalesLT.SalesOrderHeader;
+-----------------------
+
+--task3
+-----------------------
+select FirstName + ' ' + isnull(MiddleName , '') + LastName as CustomerName
+from SalesLT.Customer;
+--
+UPDATE SalesLT.Customer
+SET EmailAddress = NULL
+WHERE CustomerID % 7 = 1;
+
+select CustomerID as Id, ISNULL(EmailAddress, Phone) as PrimaryContact
+from SalesLT.Customer;
+
+--------------------
+UPDATE SalesLT.SalesOrderHeader
+SET ShipDate = NULL
+WHERE SalesOrderID > 71899;
+
+select SalesOrderID,
+case 
+when ShipDate is not null then 'Shipped'
+else 'Awaiting Shipment'
+end as ShippingStatus
+from SalesLT.SalesOrderHeader;
+-----------------
