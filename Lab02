@@ -1,0 +1,35 @@
+--task 1
+
+select distinct City, StateProvince
+from SalesLT.Address;
+--------------------
+select top 10 percent name, Weight
+from SalesLT.Product
+order by Weight desc;
+-------------------
+select name, Weight
+from SalesLT.Product
+where Weight is not null
+order by Weight desc
+Offset 10 rows
+fetch next 100 rows only;
+-------------------
+
+--task2
+
+select name, color, size
+from SalesLT.Product
+where ProductModelID = 1;
+----------------------
+select ProductNumber, name
+from SalesLT.Product
+where (color = 'black' or color = 'red' or color = 'white') and (size = 's' or size = 'm')
+------------------------
+select ProductNumber, name, ListPrice
+from SalesLT.Product
+where ProductNumber like 'BK-%'
+------------------------
+select ProductNumber, name, ListPrice
+from SalesLT.Product
+where ProductNumber like 'BK-[^R]%-[0-9][0-9]'
+------------------------
