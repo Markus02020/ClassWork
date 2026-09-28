@@ -1,0 +1,49 @@
+---task 1----------
+
+select a.CompanyName, b.SalesOrderID, b.TotalDue
+from SalesLT.Customer as a
+inner join SalesLT.SalesOrderHeader as b
+on a.CustomerId=b.CustomerID
+-----------------------------
+
+select a.CompanyName, b.SalesOrderID, b.TotalDue, c.AddressLine1, c.AddressLine2, c.City, c.StateProvince, c.Postalcode, c.CountryRegion
+from SalesLT.Customer as a
+inner join SalesLT.SalesOrderHeader as b
+on a.CustomerId=b.CustomerID
+inner join SalesLT.CustomerAddress as ca
+on a.CustomerID=ca.CustomerID
+inner join SalesLT.Address as c
+on ca.AddressID=c.AddressID
+where ca.AddressType like 'Main Office'
+---- task 2 -----------------------------------
+select a.CompanyName,a.FirstName,a.LastName, b.SalesOrderID, b.TotalDue
+from SalesLT.Customer as a
+left join SalesLT.SalesOrderHeader as b
+on a.CustomerId=b.CustomerID
+order by b.TotalDue desc
+------------------------
+select a.CustomerID,a.CompanyName,a.FirstName,a.LastName,a.Phone
+from SalesLT.Customer as a
+inner join SalesLT.SalesOrderHeader as b
+on a.CustomerId=b.CustomerID
+inner join SalesLT.CustomerAddress as ca
+on a.CustomerID=ca.CustomerID
+inner join SalesLT.Address as c
+on ca.AddressID=c.AddressID
+where c.AddressLine1 like NULL and c.AddressLine2 like NULL
+-----------------------------------------------------------
+SELECT 
+    c.CustomerID, 
+    NULL AS ProductID
+FROM SalesLT.Customer AS c
+LEFT JOIN SalesLT.SalesOrderHeader AS oh 
+    ON c.CustomerID = oh.CustomerID
+WHERE oh.SalesOrderID IS NULL
+union
+SELECT 
+    NULL AS CustomerID, 
+    p.ProductID
+FROM SalesLT.Product AS p
+LEFT JOIN SalesLT.SalesOrderDetail AS od 
+    ON p.ProductID = od.ProductID
+WHERE od.SalesOrderID IS NULL
