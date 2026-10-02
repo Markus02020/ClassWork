@@ -32,18 +32,12 @@ inner join SalesLT.Address as c
 on ca.AddressID=c.AddressID
 where c.AddressLine1 like NULL and c.AddressLine2 like NULL
 -----------------------------------------------------------
-SELECT 
-    c.CustomerID, 
-    NULL AS ProductID
-FROM SalesLT.Customer AS c
-LEFT JOIN SalesLT.SalesOrderHeader AS oh 
-    ON c.CustomerID = oh.CustomerID
-WHERE oh.SalesOrderID IS NULL
-union
-SELECT 
-    NULL AS CustomerID, 
-    p.ProductID
-FROM SalesLT.Product AS p
-LEFT JOIN SalesLT.SalesOrderDetail AS od 
-    ON p.ProductID = od.ProductID
-WHERE od.SalesOrderID IS NULL
+select a.CustomerID, b.ProductID
+from SalesLT.Customer AS a
+left JOIN SalesLT.SalesOrderHeader AS c
+on a.CustomerID = c.CustomerID
+left JOIN SalesLT.SalesOrderDetail AS ca
+on c.SalesOrderID = ca.SalesOrderID
+full join SalesLT.Product AS b
+on ca.ProductID = b.ProductID
+where c.SalesOrderID IS NULL;
