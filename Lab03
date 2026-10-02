@@ -41,3 +41,5 @@ on c.SalesOrderID = ca.SalesOrderID
 full join SalesLT.Product AS b
 on ca.ProductID = b.ProductID
 where c.SalesOrderID IS NULL;
+--what a thrill--
+--with darkness and silence through the night--
