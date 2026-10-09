@@ -32,7 +32,6 @@ FROM sales.customer c
 JOIN sales.customeraddress ca ON c.customerid = ca.customerid
 JOIN sales.address a ON ca.addressid = a.addressid
 WHERE ca.addresstype = 'Shipping'
-ORDER BY companyname, addresstype
 LIMIT 10;
 
 -- task 2.1
