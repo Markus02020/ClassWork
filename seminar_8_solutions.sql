@@ -1,10 +1,5 @@
--- Семинар 8 – Множества группировок и поворот данных
 
--- ============================================================================
--- Задача 1: Получение итогов продаж по регионам
--- ============================================================================
-
--- 1. Получите итоги для страны/региона и штата/провинции
+-- 1. 
 SELECT a.CountryRegion, a.StateProvince, SUM(soh.TotalDue) AS Revenue
 FROM SalesLT.Address AS a
 INNER JOIN SalesLT.CustomerAddress AS ca ON a.AddressID = ca.AddressID
@@ -14,7 +9,7 @@ GROUP BY ROLLUP(a.CountryRegion, a.StateProvince)
 ORDER BY a.CountryRegion, a.StateProvince;
 
 
--- 2. Укажите уровни группировки в результатах
+-- 2. 
 SELECT a.CountryRegion, a.StateProvince, SUM(soh.TotalDue) AS Revenue,
        CASE 
             WHEN GROUPING_ID(a.CountryRegion, a.StateProvince) = 3 THEN 'Total'
@@ -29,7 +24,7 @@ GROUP BY ROLLUP(a.CountryRegion, a.StateProvince)
 ORDER BY a.CountryRegion, a.StateProvince;
 
 
--- 3. Добавьте уровень группировки для городов
+-- 3. 
 SELECT a.CountryRegion, a.StateProvince, a.City, SUM(soh.TotalDue) AS Revenue,
        CASE 
             WHEN GROUPING_ID(a.CountryRegion, a.StateProvince, a.City) = 7 THEN 'Total'
@@ -45,11 +40,9 @@ GROUP BY ROLLUP(a.CountryRegion, a.StateProvince, a.City)
 ORDER BY a.CountryRegion, a.StateProvince, a.City;
 
 
--- ============================================================================
--- Задача 2: Получение доходов от продаж по категориям
--- ============================================================================
 
--- 1. Получите доход от продаж для каждой родительской категории
+
+-- 1. 
 SELECT CompanyName, [Accessories], [Bikes], [Clothing], [Components]
 FROM 
 (
